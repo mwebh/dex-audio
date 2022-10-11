@@ -12,3 +12,21 @@ menuButton.addEventListener('click', () => {
     barThree.classList.toggle("strum.bar3");
     barFour.classList.toggle("strum-bar4");
 })
+
+const items = document.querySelectorAll(".item");
+
+const observer = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle("show-item", entry.isIntersecting)
+            if (entry.isIntersecting) observer.unobserve(entry.target)
+        })
+    },
+    {
+        threshold: 0.5
+    }
+)
+
+items.forEach(item => {
+    observer.observe(item)
+})
